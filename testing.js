@@ -47,20 +47,20 @@ class Comment extends Model {
   }
 }
 
-Get collection
+// Get collection
 const postsCollection = database.get('posts');
 
-Find record
+// Find record
 const postId = 'abcdefgh';
 const post = await database.get('posts').find(postId);
 
-Query db records
+// Query db records
 const allPosts = await database.get('posts').query().fetch();
 const numberofStarredPosts = await database
   .get('posts')
   .query(Q.where('is_starred', true).fetchCount());
 
-ALL CRUD OPERATIONS PERFORMED USING WRITER METHOD
+// ALL CRUD OPERATIONS PERFORMED USING WRITER METHOD
 const query = await database.write(async () => {
   const comment = await database.get('comments').find(commentId);
   await comment.update(() => {
@@ -68,23 +68,23 @@ const query = await database.write(async () => {
   });
 });
 
-Create new record
+// Create new record
 const newPost = await database.get('posts').create((post) => {
   post.title = 'New Post';
   post.body = 'Lorem Ipsum...';
 });
 
-Update a record
+// Update a record
 const updatePost = await somePost.update((post) => {
   post.title = 'Updated Title';
 });
 
-Delete a record
+// Delete a record
 If you only use Watermelon as a local database, destroy records permanently, if you synchronize, mark as deleted instead.
 const deletePost = await somePost.markAsDeleted();
 const deletePost2 = await somePost.destroyPermanently();
 
-To override the record.id during the creation, e.g. to sync with a remote database, you can do it by record._raw property. Be aware that the id must be of type string
+// To override the record.id during the creation, e.g. to sync with a remote database, you can do it by record._raw property. Be aware that the id must be of type string
 const rawId = await database.get('posts').create((post) => {
   post._raw.id = serverId;
 });
