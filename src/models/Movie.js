@@ -16,4 +16,41 @@ export default class Movie extends Model {
   @date('release_date_at') releaseDateAt;
 
   @children('reviews') reviews;
+
+  getMovie() {
+    return {
+      title: this.title,
+      posterImage: this.posterImage,
+      genre: this.genre,
+      description: this.description,
+      releaseDateAt: this.releaseDateAt,
+    };
+  }
+
+  async addReview(body) {
+    return this.collections.get('reviews').create((review) => {
+      review.movie.set(this);
+      review.body = body;
+    });
+  }
+
+  updateMovie = async (updatedMovie) => {
+    await this.update((movie) => {
+      movie.title = updatedMovie.title;
+      movie.genre = updatedMovie.genre;
+      movie.posterImage = updatedMovie.posterImage;
+      movie.description = updatedMovie.description;
+      movie.releaseDateAt = updatedMovie.releaseDateAt;
+    });
+  };
+
+  async deleteAllReview() {
+    await this.reviews.destroyAllPermanently();
+  }
+
+  async deleteMovie() {
+    await this.deleteAllReview();
+    await this.markAsDeleted();
+    await this.destroyPermanently();
+  }
 }
