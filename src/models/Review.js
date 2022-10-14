@@ -11,4 +11,9 @@ export default class Review extends Model {
   @field('body') body;
 
   @relation('movies', 'movie_id') movie;
+
+  async deleteReview() {
+    await this.markAsDeleted(); //syncable
+    await this.destroyPermanently(); // permanent
+  }
 }
