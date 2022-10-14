@@ -105,6 +105,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-Math.random();
-Math.floor();
