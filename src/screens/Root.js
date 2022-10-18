@@ -6,32 +6,34 @@ import { Container, Content, Button, Text } from 'native-base';
 import MovieList from '../components/MovieList';
 
 export default class Root extends Component {
-  state = {
-    isGenerating: false,
-  };
+    state = {
+        isGenerating: false,
+    };
 
-  generate = async () => {
-    this.setState({
-      isGenerating: true,
-    });
-    const count = await generateRecords(this.props.database);
-    Alert.alert(`Generated ${count} records!`);
-    this.setState({ isGenerating: false });
-  };
-  render() {
-    const { isGenerating } = this.state;
-    const { database, navigation } = this.props;
+    generate = async () => {
+        this.setState({
+            isGenerating: true,
+        });
+        const count = await generateRecords(this.props.database);
+        Alert.alert(`Generated ${count} records!`);
+        this.setState({ isGenerating: false });
+    };
+    render() {
+        const { isGenerating } = this.state;
+        const { database, navigation } = this.props;
 
-    return (
-      <Container>
-        <Content>
-          <Button bordered full onPress={this.generate} style={{ marginTop: 5 }}>
-            <Text>Generate Dummy Records</Text>
-          </Button>
+        return (
+            <Container>
+                <Content>
+                    <Button bordered full onPress={this.generate} style={{ marginTop: 5 }}>
+                        <Text>Generate Dummy Records</Text>
+                    </Button>
 
-          {!isGenerating && <MovieList database={database} search="" navigation={navigation} />}
-        </Content>
-      </Container>
-    );
-  }
+                    {!isGenerating && (
+                        <MovieList database={database} search="" navigation={navigation} />
+                    )}
+                </Content>
+            </Container>
+        );
+    }
 }
