@@ -21,6 +21,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "npm": "^8.19.1",
+    "rambdax": "^8.1.0",
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-gesture-handler": "^2.3.0",
