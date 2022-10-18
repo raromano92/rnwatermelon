@@ -23,4 +23,4 @@ const database = new Database({
   modelClasses: dbModels,
 });
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => Navigation);
